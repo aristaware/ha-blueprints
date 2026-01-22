@@ -1,7 +1,7 @@
 blueprint:
-  name: eWeLink Zigbee Wireless Button (Zigbee2MQTT)
+  name: Zigbee Wireless Button (Zigbee2MQTT)
   description: >
-    Configure actions for the eWeLink Zigbee wireless button using Zigbee2MQTT.
+    Configure actions for a Zigbee wireless button using Zigbee2MQTT.
     Supports single, double, and long press events.
   domain: automation
 
@@ -10,7 +10,7 @@ blueprint:
       name: Zigbee2MQTT Action Topic
       description: >
         Enter the Zigbee2MQTT action topic for this button.
-        Example: zigbee2mqtt/Botón dormitorio Adrián/action
+        Example: zigbee2mqtt/my_button/action
       selector:
         text:
 
