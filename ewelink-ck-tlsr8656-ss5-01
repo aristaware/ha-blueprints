@@ -43,13 +43,13 @@ action:
 - choose:
   - conditions:
     - condition: template
-      value_template: '{{ action == "single" }}'
+      value_template: '{{ trigger.event.data.action == "single" }}'
     sequence: !input press_action
   - conditions:
     - condition: template
-      value_template: '{{ action == "double" }}'
+      value_template: '{{ trigger.event.data.action == "double" }}'
     sequence: !input double_press_action
   - conditions:
     - condition: template
-      value_template: '{{ action == "long" }}'
+      value_template: '{{ trigger.event.data.action == "long" }}'
     sequence: !input long_press_action
