@@ -40,7 +40,6 @@ trigger:
   device_id: !input button_id
   domain: mqtt
   type: action
-
 action:
 - choose:
   - conditions:
