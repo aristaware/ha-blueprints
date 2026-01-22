@@ -1,56 +1,61 @@
 blueprint:
-  name: eWeLink Zigbee wireless Button
-  description: Setup actions for three functions of the Zigbee button with Press ,Double Press, and long press.
+  name: eWeLink Zigbee Wireless Button (Zigbee2MQTT)
+  description: >
+    Configure actions for the eWeLink Zigbee wireless button using Zigbee2MQTT.
+    Supports single, double, and long press events.
   domain: automation
+
   input:
-    button_id:
-      name: Button
-      description: The button to configure.
+    button_device:
+      name: Zigbee Button
+      description: Select the Zigbee2MQTT button device.
       selector:
         device:
           manufacturer: eWeLink
           multiple: false
+
     press_action:
-      name: Press Action
-      description: Action to perform on Press.
+      name: Single Press Action
       default: []
       selector:
         action: {}
+
     double_press_action:
       name: Double Press Action
-      description: Action to perform on Double Press.
       default: []
       selector:
         action: {}
+
     long_press_action:
       name: Long Press Action
-      description: Action to perform on Hold.
       default: []
       selector:
         action: {}
-  source_url: https://community.home-assistant.io/t/zha-sonoff-snzb-01p-wireless-button-short-double-long-press-action/635422
+
 variables:
-  button_id: !input button_id
+  button_device: !input button_device
   press_action: !input press_action
   double_press_action: !input double_press_action
   long_press_action: !input long_press_action
+
 trigger:
-- id: button_press
-  trigger: device
-  device_id: !input button_id
-  domain: mqtt
-  type: action
+  - platform: mqtt
+    topic: >
+      zigbee2mqtt/{{ state_attr(button_device, 'name') }}/action
+
 action:
-- choose:
-  - conditions:
-    - condition: template
-      value_template: '{{ trigger.subtype == "single" }}'
-    sequence: !input press_action
-  - conditions:
-    - condition: template
-      value_template: '{{ trigger.subtype == "double" }}'
-    sequence: !input double_press_action
-  - conditions:
-    - condition: template
-      value_template: '{{ trigger.subtype == "long" }}'
-    sequence: !input long_press_action
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'single' }}"
+        sequence: !input press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'double' }}"
+        sequence: !input double_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'long' }}"
+        sequence: !input long_press_action
