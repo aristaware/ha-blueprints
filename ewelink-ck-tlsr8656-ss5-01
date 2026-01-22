@@ -35,10 +35,12 @@ variables:
   double_press_action: !input double_press_action
   long_press_action: !input long_press_action
 trigger:
-- platform: event
-  event_type: zha_event
-  event_data:
-    device_id: !input button_id
+- id: button_press
+  trigger: device
+  device_id: !input button_id
+  domain: mqtt
+  type: action
+
 action:
 - choose:
   - conditions:
