@@ -34,14 +34,11 @@ blueprint:
 
 variables:
   button_device: !input button_device
-  press_action: !input press_action
-  double_press_action: !input double_press_action
-  long_press_action: !input long_press_action
+  ieee: "{{ device_attr(button_device, 'identifiers') | list | first | replace('zigbee2mqtt_', '') }}"
 
 trigger:
   - platform: mqtt
-    topic: >
-      zigbee2mqtt/{{ device_attr(button_device, 'name') }}/action
+    topic: "zigbee2mqtt/{{ ieee }}/action"
 
 action:
   - choose:
@@ -59,5 +56,3 @@ action:
           - condition: template
             value_template: "{{ trigger.payload == 'long' }}"
         sequence: !input long_press_action
-
-mode: restart
