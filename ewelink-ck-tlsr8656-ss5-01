@@ -43,13 +43,13 @@ action:
 - choose:
   - conditions:
     - condition: template
-      value_template: '{{ trigger.event.data.command == "toggle" }}'
+      value_template: '{{ action == "single" }}'
     sequence: !input press_action
   - conditions:
     - condition: template
-      value_template: '{{ trigger.event.data.command == "on" }}'
+      value_template: '{{ action == "double" }}'
     sequence: !input double_press_action
   - conditions:
     - condition: template
-      value_template: '{{ trigger.event.data.command == "off" }}'
+      value_template: '{{ action == "long" }}'
     sequence: !input long_press_action
