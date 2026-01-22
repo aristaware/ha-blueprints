@@ -6,13 +6,13 @@ blueprint:
   domain: automation
 
   input:
-    button_device:
-      name: Zigbee Button
-      description: Select the Zigbee2MQTT button device.
+    mqtt_topic:
+      name: Zigbee2MQTT Action Topic
+      description: >
+        Enter the Zigbee2MQTT action topic for this button.
+        Example: zigbee2mqtt/Botón dormitorio Adrián/action
       selector:
-        device:
-          manufacturer: eWeLink
-          multiple: false
+        text:
 
     press_action:
       name: Single Press Action
@@ -32,16 +32,9 @@ blueprint:
       selector:
         action: {}
 
-variables:
-  button_device: !input button_device
-  press_action: !input press_action
-  double_press_action: !input double_press_action
-  long_press_action: !input long_press_action
-
 trigger:
   - platform: mqtt
-    topic: >
-      zigbee2mqtt/{{ device_attr(button_device, 'name') }}/action
+    topic: !input mqtt_topic
 
 action:
   - choose:
@@ -59,5 +52,3 @@ action:
           - condition: template
             value_template: "{{ trigger.payload == 'long' }}"
         sequence: !input long_press_action
-
-mode: restart
