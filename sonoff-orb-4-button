@@ -1,0 +1,197 @@
+blueprint:
+  name: Sonoff 4 gang orb (SNZB-01M)
+  description: >
+    Configure actions for a Sonoff Zigbee wireless 4 gang orb using Zigbee2MQTT.
+    Supports single, double, triple and long press events for each button.
+  domain: automation
+
+  input:
+    mqtt_topic:
+      name: Zigbee2MQTT Action Topic
+      description: >
+        Enter the Zigbee2MQTT action topic for this button.
+        Example: zigbee2mqtt/my_button/action
+      selector:
+        text:
+
+    button_1_single_press_action:
+      name: Button 1 Single Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_1_double_press_action:
+      name: Button 1 Double Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_1_triple_press_action:
+      name: Button 1 Triple Press Action
+      default: []
+      selector:
+        action: {}
+        
+    button_1_long_press_action:
+      name: Button 1 Long Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_2_single_press_action:
+      name: Button 2 Single Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_2_double_press_action:
+      name: Button 2 Double Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_2_triple_press_action:
+      name: Button 2 Triple Press Action
+      default: []
+      selector:
+        action: {}
+        
+    button_2_long_press_action:
+      name: Button 2 Long Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_3_single_press_action:
+      name: Button 3 Single Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_3_double_press_action:
+      name: Button 3 Double Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_3_triple_press_action:
+      name: Button 3 Triple Press Action
+      default: []
+      selector:
+        action: {}
+        
+    button_3_long_press_action:
+      name: Button 3 Long Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_4_single_press_action:
+      name: Button 4 Single Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_4_double_press_action::
+      name: Button 4 Double Press Action
+      default: []
+      selector:
+        action: {}
+
+    button_4_triple_press_action::
+      name: Button 4 Triple Press Action
+      default: []
+      selector:
+        action: {}
+        
+    button_1_long_press_action:
+      name: Button 4 Long Press Action
+      default: []
+      selector:
+        action: {}
+
+trigger:
+  - platform: mqtt
+    topic: !input mqtt_topic
+
+action:
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'single_button_1' }}"
+        sequence: !input button_1_single_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'double_button_1' }}"
+        sequence: !input button_1_double_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'triple_button_1' }}"
+        sequence: !input button_1_triple_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'long_button_1' }}"
+        sequence: !input button_1_long_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'single_button_2' }}"
+        sequence: !input button_2_single_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'double_button_2' }}"
+        sequence: !input button_2_double_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'triple_button_2' }}"
+        sequence: !input button_2_triple_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'long_button_2' }}"
+        sequence: !input button_2_long_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'single_button_3' }}"
+        sequence: !input button_3_single_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'double_button_3' }}"
+        sequence: !input button_3_double_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'triple_button_3' }}"
+        sequence: !input button_3_triple_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'long_button_3' }}"
+        sequence: !input button_3_long_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'single_button_4' }}"
+        sequence: !input button_4_single_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'double_button_4' }}"
+        sequence: !input button_4_double_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'triple_button_4' }}"
+        sequence: !input button_4_triple_press_action
+
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'long_button_4' }}"
+        sequence: !input button_4_long_press_action
