@@ -104,7 +104,7 @@ blueprint:
       selector:
         action: {}
         
-    button_1_long_press_action:
+    button_4_long_press_action:
       name: Button 4 Long Press Action
       default: []
       selector:
