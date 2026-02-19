@@ -92,13 +92,13 @@ blueprint:
       selector:
         action: {}
 
-    button_4_double_press_action::
+    button_4_double_press_action:
       name: Button 4 Double Press Action
       default: []
       selector:
         action: {}
 
-    button_4_triple_press_action::
+    button_4_triple_press_action:
       name: Button 4 Triple Press Action
       default: []
       selector:
